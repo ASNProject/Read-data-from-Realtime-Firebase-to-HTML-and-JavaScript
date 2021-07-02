@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Electrical Conductivity Meter</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css" />
+  </head>
+  <body>
+    <h1 class="text-center" style="color: cornflowerblue">
+      ELECTRICAL CONDUCTIVITY
+    </h1>
+    <br />
+   <form action="" id="form">
+    <div class="contrainer d-flex justify-content-center">
+        <div class="row h-100">
+          <div class="col">
+            <div class="card border-primary mb-3" style="width: 18rem">
+              <div
+                class="card-header bg-transparent border-primary"
+                style="text-align: center"
+              >
+                Electrical Conductivity
+              </div>
+              <div class="card-body text-success">
+                <h3 id="conductivity" style="text-align: center;"></h3>
+              </div>
+              <div
+                class="card-footer bg-transparent border-primary"
+                style="text-align: center"
+              >
+                ms/cm
+              </div>
+            </div>
+          </div>
+  
+          <div class="col">
+            <div class="card border-primary mb-3" style="width: 18rem">
+              <div
+                class="card-header bg-transparent border-primary"
+                style="text-align: center"
+              >
+                Temperature
+              </div>
+              <div class="card-body text-success">
+                  <br>
+                <h3 id="temperature" style="text-align: center;">25</h3>
+                <br>
+              </div>
+              <div
+                class="card-footer bg-transparent border-primary"
+                style="text-align: center"
+              >
+                Celcius
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br>
+     
+        
+      </div>
+      <br><br><br>
+      <h1 style="text-align: center;">Kadar MSG</h1>
+      <h1 id="prediksi" style="text-align: center;"></h1>
+
+      <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+  
+      <script id="MainScript">
+        var firebaseConfig = {
+          apiKey: "AIzaSyCMSLP75oqnnh2wU9kIU7rL6ncasvEEC14",
+          authDomain: "msgiot.firebaseapp.com",
+          databaseURL: "https://msgiot-default-rtdb.firebaseio.com",
+          projectId: "msgiot",
+          storageBucket: "msgiot.appspot.com",
+          messagingSenderId: "514666306898",
+          appId: "1:514666306898:web:f8640d1701f8e8c1cc6e8b",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var conductivity = document.getElementById('conductivity');
+        var prediksi = document.getElementById('prediksi');
+        var dbRef = firebase.database().ref().child('msg/EC/');
+        dbRef.on('value', snap => conductivity.innerText = snap.val());
+        var dbRef1 = firebase.database().ref().child('msg/Prediksi/');
+        dbRef1.on('value', snap => prediksi.innerText = snap.val());
+  
+  
+      </script>
+   </form>
+
+  </body>
+</html>
